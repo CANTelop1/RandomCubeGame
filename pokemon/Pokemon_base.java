@@ -1,3 +1,4 @@
+package pokemon;
 /*
 This class is the base for all Pokemon
 each Pokemon has:
@@ -25,7 +26,7 @@ public class Pokemon_base {
     protected int sAttack;
     protected int defence;
     protected int sDefence;
-    protected ArrayList<> moveSet;
+    //protected ArrayList<> moveSet;
 
     public Pokemon_base(String name, int level, int hp, String type, int speed, int attack, int sAttack, int defence, int sDefence){
         this.name = name;
@@ -111,4 +112,18 @@ public class Pokemon_base {
         this.sDefence = sDefence;
     }
 
+    @Override
+    public String toString() {
+        return "Pokemon_base{" +
+                "name='" + name + '\'' +
+                ", level=" + level +
+                ", hp=" + hp +
+                ", type='" + type + '\'' +
+                ", speed=" + speed +
+                ", attack=" + attack +
+                ", sAttack=" + sAttack +
+                ", defence=" + defence +
+                ", sDefence=" + sDefence +
+                '}';
+    }
 }
