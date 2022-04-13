@@ -1,4 +1,5 @@
 package pokemon;
+
 /*
 This class is the base for all Pokemon
 each Pokemon has:
@@ -14,6 +15,8 @@ each Pokemon has:
 - Move set
  */
 
+import java.util.Random;
+
 public class Pokemon_base {
     protected String name;
     protected int level;
@@ -24,9 +27,10 @@ public class Pokemon_base {
     protected int sAttack;
     protected int defence;
     protected int sDefence;
+    protected final int maxHp;
     //protected ArrayList<> moveSet;
 
-    public Pokemon_base(String name, int level, int hp, PokeType type, int speed, int attack, int sAttack, int defence, int sDefence){
+    public Pokemon_base(String name, int level, int hp, PokeType type, int speed, int attack, int sAttack, int defence, int sDefence, int maxHp){
         this.name = name;
         this.level = level;
         this.hp = hp;
@@ -36,11 +40,26 @@ public class Pokemon_base {
         this.sAttack = sAttack;
         this.defence = defence;
         this.sDefence = sDefence;
+        this.maxHp = maxHp;
     }
 
-    public void calcDamage(int inAttack){
-
+    public int calcDamage(int inAttack, PokeType aType){
+        Random r = new Random();
+        return (int) Math.floor(10*((inAttack*howEffective(aType))/defence) + r.nextInt(2)-1);
     }
+
+    public int calcSpecialDamage(int inAttack, PokeType aType){
+        Random r = new Random();
+        return (int) Math.floor(10*((inAttack*howEffective(aType))/sDefence) + r.nextInt(2)-1);
+    }
+    
+    public void receiveSpecialAttack(int inAttack, PokeType aType){
+        hurt(calcSpecialDamage(inAttack,aType));
+    }
+    public void receiveAttack(int inAttack, PokeType aType){
+        hurt(calcDamage(inAttack,aType));
+    }
+
 
     public Double howEffective(PokeType aType){
         if(type == PokeType.FIRE){
@@ -79,16 +98,21 @@ public class Pokemon_base {
                     return 1.0;
             }
         }
+        return 1.0;
     }
 
     public void heal(int health){
-        this.hp += health;
+        setHp(hp+health);
     }
 
     public void hurt(int health){
-        this.hp -= health;
+        setHp(this.hp-health);
     }
 
+    
+    /*
+    Getters and Setters
+     */
     public String getName() {
         return name;
     }
@@ -133,8 +157,16 @@ public class Pokemon_base {
         this.level = level;
     }
 
-    public void setHp(int hp) {
-        this.hp = hp;
+    public void setHp(int hp){
+        if(hp < 0){
+            this.hp = 0;
+            System.out.println(name + " is dead");
+        }
+        else if(hp > maxHp){
+            this.hp = maxHp;
+        }
+        else
+            this.hp = hp;
     }
 
     public void setType(PokeType type) {
@@ -173,6 +205,7 @@ public class Pokemon_base {
                 ", sAttack=" + sAttack +
                 ", defence=" + defence +
                 ", sDefence=" + sDefence +
+                ", PokeType" + type +
                 '}';
     }
 }
