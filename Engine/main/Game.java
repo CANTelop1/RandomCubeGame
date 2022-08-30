@@ -20,11 +20,9 @@ public class Game extends Canvas implements Runnable {
     public Game(){
         System.out.println("Note: game created");
 
-        this.addKeyListener(new KeyInput());
-
         handler = new Handler();
 
-        this.addKeyListener(new KeyInput());
+        this.addKeyListener(new KeyInput(handler));
 
         new Window(WIDTH,HEIGHT,"LEGO",this);
 
@@ -48,7 +46,6 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    @Override
     public void run() {
         System.out.println("Note: game.run()");
 
