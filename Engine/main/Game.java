@@ -1,11 +1,14 @@
 package Engine.main;
 
 import Engine.main.Objects.Player;
+import Engine.main.KeyInput;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
+
+    private static final long serialVersionUID = 1L;
 
     public static final int WIDTH = 640, HEIGHT = WIDTH / 12 * 9;
 
@@ -15,7 +18,13 @@ public class Game extends Canvas implements Runnable {
     private final Handler handler;
 
     public Game(){
+        System.out.println("Note: game created");
+
+        this.addKeyListener(new KeyInput());
+
         handler = new Handler();
+
+        this.addKeyListener(new KeyInput());
 
         new Window(WIDTH,HEIGHT,"LEGO",this);
 
@@ -23,9 +32,11 @@ public class Game extends Canvas implements Runnable {
     }
 
     public synchronized void start(){
+        System.out.println("Note: game.start()");
+
         thread = new Thread(this);
-        thread.start();
         running = true;
+        thread.start();
     }
     public synchronized void stop(){
         try{
@@ -39,6 +50,8 @@ public class Game extends Canvas implements Runnable {
 
     @Override
     public void run() {
+        System.out.println("Note: game.run()");
+
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -65,7 +78,6 @@ public class Game extends Canvas implements Runnable {
             }
         }
         stop();
-
     }
 
     private void tick(){
@@ -73,7 +85,7 @@ public class Game extends Canvas implements Runnable {
     }
 
     private void render(){
-        System.out.println("Is render");
+        //System.out.println("Is render");
         BufferStrategy bs = this.getBufferStrategy();
         if(bs == null){
             this.createBufferStrategy(2);
