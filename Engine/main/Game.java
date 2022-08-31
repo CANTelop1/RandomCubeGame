@@ -49,6 +49,8 @@ public class Game extends Canvas implements Runnable {
     public void run() {
         System.out.println("Note: game.run()");
 
+        this.requestFocus();
+
         long lastTime = System.nanoTime();
         double amountOfTicks = 60.0;
         double ns = 1000000000 / amountOfTicks;
@@ -70,7 +72,7 @@ public class Game extends Canvas implements Runnable {
 
             if(System.currentTimeMillis() - timer > 1000){
                 timer += 1000;
-                System.out.println("FPS: " + frames);
+                //System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }
@@ -99,6 +101,12 @@ public class Game extends Canvas implements Runnable {
         g.dispose();
         bs.show();
 
+    }
+
+    public static int clamp(int var, int min, int max){
+        if(var >= max) return var = max;
+        else if(var <= min) return  var = min;
+        else return var;
     }
 
     public static void main(String[] args) {

@@ -5,8 +5,6 @@ import Engine.main.Objects.GameObject;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-import java.util.ArrayList;
-
 public class KeyInput extends KeyAdapter {
     private Handler handler;
     private int currentPressed;
@@ -31,7 +29,7 @@ public class KeyInput extends KeyAdapter {
             }
         }
 
-        System.out.println(key);
+        if(key == KeyEvent.VK_ESCAPE) System.exit(1);
 
     }
 
