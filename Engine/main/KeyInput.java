@@ -18,6 +18,7 @@ public class KeyInput extends KeyAdapter {
     @Override
     public void keyPressed(KeyEvent e){
         int key = e.getKeyCode();
+        currentPressed.clear();
         currentPressed.add(key);
 
         for(int i = 0; i < handler.objects.size(); i++){
@@ -48,19 +49,19 @@ public class KeyInput extends KeyAdapter {
                 if(key == KeyEvent.VK_D) tempObject.setVelX(0);
                 for(int j = 0; j < currentPressed.size();j++){
                     if(currentPressed.get(j) == key && key == KeyEvent.VK_UP){
-                        currentPressed.remove(j);
+                        //currentPressed.remove(j);
                         tempObject.setY(tempObject.getY()-50);
                     }
                     if(currentPressed.get(j) == key && key == KeyEvent.VK_DOWN){
-                        currentPressed.remove(j);
+                        //currentPressed.remove(j);
                         tempObject.setY(tempObject.getY()+50);
                     }
                     if(currentPressed.get(j) == key && key == KeyEvent.VK_RIGHT){
-                        currentPressed.remove(j);
+                        //currentPressed.remove(j);
                         tempObject.setX(tempObject.getX()+50);
                     }
                     if(currentPressed.get(j) == key && key == KeyEvent.VK_LEFT){
-                        currentPressed.remove(j);
+                        //currentPressed.remove(j);
                         tempObject.setX(tempObject.getX()-50);
                     }
                 }
