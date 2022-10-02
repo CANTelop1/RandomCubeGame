@@ -17,10 +17,14 @@ public class Game extends Canvas implements Runnable {
 
     private final Handler handler;
 
+    private HUD hud;
+
     public Game(){
         System.out.println("Note: game created");
 
         handler = new Handler();
+
+        hud = new HUD();
 
         this.addKeyListener(new KeyInput(handler));
 
@@ -81,6 +85,8 @@ public class Game extends Canvas implements Runnable {
 
     private void tick(){
         handler.tick();
+        hud.tick();
+
     }
 
     private void render(){
@@ -97,6 +103,8 @@ public class Game extends Canvas implements Runnable {
         g.fillRect(0,0,WIDTH,HEIGHT);
 
         handler.render(g);
+
+        hud.render(g);
 
         g.dispose();
         bs.show();
