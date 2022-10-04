@@ -13,7 +13,7 @@ public class HUD {
 
         HEALTH = Game.clamp(HEALTH, 0, 100);
         score++;
-        if(score%1000==0){
+        if(score%100==0){
             level +=1;
         }
 
