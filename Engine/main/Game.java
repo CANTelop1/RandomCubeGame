@@ -1,5 +1,6 @@
 package Engine.main;
 
+import Engine.main.Objects.Enemy;
 import Engine.main.Objects.Player;
 import Engine.main.KeyInput;
 
@@ -16,8 +17,8 @@ public class Game extends Canvas implements Runnable {
     private boolean running = false;
 
     private final Handler handler;
-
     private HUD hud;
+    private Spawn spawner;
 
     public Game(){
         System.out.println("Note: game created");
@@ -26,11 +27,14 @@ public class Game extends Canvas implements Runnable {
 
         hud = new HUD();
 
+        spawner = new Spawn(handler,hud);
+
         this.addKeyListener(new KeyInput(handler));
 
         new Window(WIDTH,HEIGHT,"LEGO",this);
 
-        handler.addObject(new Player(100,100,ID.player));
+        handler.addObject(new Player(100,100,ID.player,handler));
+        handler.addObject(new Enemy(16,100,ID.enemy,handler));
     }
 
     public synchronized void start(){
