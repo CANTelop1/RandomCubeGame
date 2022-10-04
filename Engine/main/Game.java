@@ -26,7 +26,7 @@ public class Game extends Canvas implements Runnable {
         Game
     }
 
-    public STATE gameState = STATE.Game;
+    public STATE gameState = STATE.Menu;
 
     public Game(){
         System.out.println("Note: game created");
@@ -97,6 +97,9 @@ public class Game extends Canvas implements Runnable {
 
     private void tick(){
         handler.tick();
+        if (gameState == STATE.Game){
+
+        }
         hud.tick();
         spawner.tick();
 
