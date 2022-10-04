@@ -7,7 +7,7 @@ public class HUD {
     public static float HEALTH = 100;
 
     private float score = 0;
-    private float level = 1;
+    private float level = 0;
 
     public void tick(){
 

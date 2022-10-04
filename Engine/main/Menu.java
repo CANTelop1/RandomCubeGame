@@ -22,10 +22,28 @@ public class Menu extends MouseAdapter{
         int mx = e.getX();
         int my = e.getY();
 
+        // play button
         if(mouseOver(mx, my, 210, 150, 200, 64)){
             game.gameState = Game.STATE.Game;
             handler.addObject(new Player(100,100,ID.player,handler));
             handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+        }
+        // help button
+        if (mouseOver(mx, my, 210, 250, 200, 64)){
+            game.gameState = Game.STATE.Help;
+        }
+
+        if(game.gameState == Game.STATE.Help){
+            if(mouseOver(mx, my, 210, 350, 200, 64)){
+                game.gameState = Game.STATE.Menu;
+                return;
+            }
+        }
+
+        // exit button
+        if(mouseOver(mx, my, 210, 350, 200, 64)){
+            System.exit(1);
+
         }
 
     }
@@ -47,25 +65,42 @@ public class Menu extends MouseAdapter{
     }
 
     public void render(Graphics g){
-        Font fnt = new Font("arial", 1, 50);
-        Font fnt2 = new Font("arial", 1, 30);
+        if(game.gameState == Game.STATE.Menu){
+            Font fnt = new Font("arial", 1, 50);
+            Font fnt2 = new Font("arial", 1, 30);
 
-        g.setFont(fnt);
-        g.setColor(Color.white);
-        g.drawString("Menu", 240, 70);
+            g.setFont(fnt);
+            g.setColor(Color.white);
+            g.drawString("Menu", 240, 70);
 
-        g.setFont(fnt2);
-        g.drawRect(210, 150, 200, 64);
-        g.drawString("Play", 275, 190);
+            g.setFont(fnt2);
+            g.drawRect(210, 150, 200, 64);
+            g.drawString("Play", 275, 190);
 
 
-        g.setColor(Color.white);
-        g.drawRect(210, 250, 200, 64);
-        g.drawString("Help", 275, 290);
+            g.setColor(Color.white);
+            g.drawRect(210, 250, 200, 64);
+            g.drawString("Help", 275, 290);
 
-        g.setColor(Color.white);
-        g.drawRect(210, 350, 200, 64);
-        g.drawString("Quit", 275, 390);
+            g.setColor(Color.white);
+            g.drawRect(210, 350, 200, 64);
+            g.drawString("Quit", 275, 390);
+        } else if(game.gameState == Game.STATE.Help){
+            Font fnt = new Font("arial", 1, 50);
+            Font fnt2 = new Font("arial", 1, 30);
+
+            g.setFont(fnt);
+            g.setColor(Color.white);
+            g.drawString("Help", 250, 70);
+
+            g.setFont(fnt2);
+            g.drawString("this needs work", 200,150);
+
+            g.setColor(Color.white);
+            g.drawRect(210, 350, 200, 64);
+            g.drawString("Back", 275, 390);
+
+        }
 
     }
 }
