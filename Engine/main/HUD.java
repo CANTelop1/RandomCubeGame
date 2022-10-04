@@ -37,4 +37,8 @@ public class HUD {
     public int getScore(){
         return score;
     }
+
+    public int getLevel(){
+        return level;
+    }
 }
