@@ -4,14 +4,14 @@ import java.awt.*;
 
 public class HUD {
 
-    public static int HEALTH = 100;
+    public static float HEALTH = 100;
 
-    private int score = 0;
-    private int level = 1;
+    private float score = 0;
+    private float level = 1;
 
     public void tick(){
 
-        HEALTH = Game.clamp(HEALTH, 0, 100);
+        HEALTH = Game.clamp(HEALTH, 0.0f, 100.0f);
         score++;
         if(score%100==0){
             level +=1;
@@ -22,7 +22,7 @@ public class HUD {
         g.setColor(Color.BLACK);
         g.fillRect(15,15,200,32);
         g.setColor(Color.GREEN);
-        g.fillRect(15,15,HEALTH*2,32);
+        g.fillRect(15,15,(int)HEALTH*2,32);
         g.drawRect(15,15,200,32);
 
         g.drawString("Score: " + score, 15,64);
@@ -30,15 +30,15 @@ public class HUD {
 
     }
 
-    public void score(int score){
+    public void score(float score){
         this.score = score;
     }
 
-    public int getScore(){
+    public float getScore(){
         return score;
     }
 
-    public int getLevel(){
+    public float getLevel(){
         return level;
     }
 }

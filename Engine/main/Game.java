@@ -3,6 +3,7 @@ package Engine.main;
 import Engine.main.Objects.Enemy;
 import Engine.main.Objects.Player;
 import Engine.main.KeyInput;
+import Engine.main.Objects.SmartEnemy;
 
 import java.awt.*;
 import java.awt.image.BufferStrategy;
@@ -20,6 +21,13 @@ public class Game extends Canvas implements Runnable {
     private HUD hud;
     private Spawn spawner;
 
+    public enum STATE {
+        Menu,
+        Game
+    }
+
+    public STATE gameState = STATE.Game;
+
     public Game(){
         System.out.println("Note: game created");
 
@@ -34,7 +42,7 @@ public class Game extends Canvas implements Runnable {
         new Window(WIDTH,HEIGHT,"LEGO",this);
 
         handler.addObject(new Player(100,100,ID.player,handler));
-        handler.addObject(new Enemy(16,100,ID.enemy,handler));
+        handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
     }
 
     public synchronized void start(){
@@ -116,7 +124,7 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    public static int clamp(int var, int min, int max){
+    public static float clamp(float var, float min, float max){
         if(var >= max) return var = max;
         else if(var <= min) return  var = min;
         else return var;

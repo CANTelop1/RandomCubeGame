@@ -11,7 +11,7 @@ public class Spawn {
     private HUD hud;
     private Random r = new Random();
 
-    private int levelTrack = 0;
+    private float levelTrack = 0;
 
     public Spawn(Handler handler, HUD hud){
         this.handler = handler;

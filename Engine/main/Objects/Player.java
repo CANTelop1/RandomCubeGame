@@ -16,7 +16,7 @@ public class Player extends GameObject {
         this.handler = handler;
     }
 
-    public Rectangle getBounds(){return new Rectangle(x,y,32,32);}
+    public Rectangle getBounds(){return new Rectangle((int)x,(int)y,32,32);}
 
     @Override
     public void tick() {
@@ -33,7 +33,7 @@ public class Player extends GameObject {
         for(int i = 0; i < handler.objects.size(); i++){
             GameObject tempObject = handler.objects.get(i);
 
-            if(tempObject.getId() == ID.enemy){
+            if(tempObject.getId() == ID.enemy || tempObject.getId() == ID.smartEnemy){
                 if(getBounds().intersects(tempObject.getBounds())){
                     HUD.HEALTH -= 2;
 
@@ -45,7 +45,7 @@ public class Player extends GameObject {
     @Override
     public void render(Graphics g) {
         g.setColor(Color.blue);
-        g.fillRect(x,y,32,32);
+        g.fillRect((int)x,(int)y,32,32);
 
     }
 }
