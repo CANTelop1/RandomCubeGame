@@ -20,6 +20,7 @@ public class Game extends Canvas implements Runnable {
     private final Handler handler;
     private HUD hud;
     private Spawn spawner;
+    private Menu menu;
 
     public enum STATE {
         Menu,
@@ -37,12 +38,18 @@ public class Game extends Canvas implements Runnable {
 
         spawner = new Spawn(handler,hud);
 
+        menu = new Menu(handler,this);
+
         this.addKeyListener(new KeyInput(handler));
+
+        this.addMouseListener(menu);
 
         new Window(WIDTH,HEIGHT,"LEGO",this);
 
-        handler.addObject(new Player(100,100,ID.player,handler));
-        handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+        if(gameState == STATE.Game){
+            handler.addObject(new Player(100,100,ID.player,handler));
+            handler.addObject(new SmartEnemy(250,250,ID.smartEnemy,handler));
+        }
     }
 
     public synchronized void start(){
@@ -98,10 +105,9 @@ public class Game extends Canvas implements Runnable {
     private void tick(){
         handler.tick();
         if (gameState == STATE.Game){
-
+            hud.tick();
+            spawner.tick();
         }
-        hud.tick();
-        spawner.tick();
 
     }
 
@@ -120,7 +126,11 @@ public class Game extends Canvas implements Runnable {
 
         handler.render(g);
 
-        hud.render(g);
+        if (gameState == STATE.Game){
+            hud.render(g);
+        }else if(gameState == STATE.Menu){
+            menu.render(g);
+        }
 
         g.dispose();
         bs.show();
