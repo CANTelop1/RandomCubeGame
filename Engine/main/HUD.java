@@ -41,4 +41,9 @@ public class HUD {
     public float getLevel(){
         return level;
     }
+
+    public void reset(){
+        score = 0;
+        level = 0;
+    }
 }

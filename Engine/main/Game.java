@@ -25,7 +25,8 @@ public class Game extends Canvas implements Runnable {
     public enum STATE {
         Menu,
         Help,
-        Game
+        Game,
+        End
     }
 
     public STATE gameState = STATE.Menu;
@@ -33,13 +34,13 @@ public class Game extends Canvas implements Runnable {
     public Game(){
         System.out.println("Note: game created");
 
-        handler = new Handler();
+        handler = new Handler(this);
 
         hud = new HUD();
 
         spawner = new Spawn(handler,hud);
 
-        menu = new Menu(handler,this);
+        menu = new Menu(handler,this,hud);
 
         this.addKeyListener(new KeyInput(handler));
 
@@ -108,7 +109,12 @@ public class Game extends Canvas implements Runnable {
         if (gameState == STATE.Game) {
             hud.tick();
             spawner.tick();
-        }else if(gameState == STATE.Help||gameState == STATE.Menu){
+            if(hud.HEALTH<=0){
+                HUD.HEALTH=100;
+                gameState = STATE.End;
+                handler.clearEnemys();
+            }
+        }else if(gameState == STATE.Help||gameState == STATE.Menu||gameState == STATE.End){
             menu.tick();
         }
 
@@ -131,7 +137,7 @@ public class Game extends Canvas implements Runnable {
 
         if (gameState == STATE.Game){
             hud.render(g);
-        }else if(gameState == STATE.Menu || gameState == STATE.Help){
+        }else if(gameState == STATE.Menu || gameState == STATE.Help|| gameState == STATE.End){
             menu.render(g);
         }
 
