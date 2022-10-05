@@ -119,13 +119,13 @@ public class Menu extends MouseAdapter{
             Font fnt2 = new Font("arial", 1, 30);
 
             g.setFont(fnt);
-            g.setColor(Color.white);
+            g.setColor(Color.red);
             g.drawString("Game Over", 180, 70);
 
             g.setFont(fnt2);
+            g.setColor(Color.WHITE);
             g.drawString("you lost with a score of: " + hud.getScore(), 100,150);
 
-            g.setColor(Color.white);
             g.drawRect(210, 350, 200, 64);
             g.drawString("Back", 275, 390);
 

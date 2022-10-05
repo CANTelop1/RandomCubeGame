@@ -46,7 +46,7 @@ public class Game extends Canvas implements Runnable {
 
         this.addMouseListener(menu);
 
-        new Window(WIDTH,HEIGHT,"LEGO",this);
+        new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
 
         if(gameState == STATE.Game){
             handler.addObject(new Player(100,100,ID.player,handler));
