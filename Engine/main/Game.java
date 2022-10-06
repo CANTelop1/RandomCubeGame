@@ -35,16 +35,13 @@ public class Game extends Canvas implements Runnable {
         System.out.println("Note: game created");
 
         handler = new Handler(this);
-
         hud = new HUD();
-
         spawner = new Spawn(handler,hud);
-
         menu = new Menu(handler,this,hud);
-
         this.addKeyListener(new KeyInput(handler));
-
         this.addMouseListener(menu);
+
+        //AudioPlayer.load();
 
         new Window(WIDTH,HEIGHT,"RANDOM CUBE GAME",this);
 
