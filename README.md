@@ -1,2 +1,4 @@
-# PokemonProj
-Just me trying to recreate my favourite game using Java
+# Random Cube Game
+
+The first ever game I've created 
+following along with RealTutsGML's tutorial 
